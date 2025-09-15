@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Step 2: Replace with your actual API key
 api_key = 'YOUR_API_KEY'
-headers = {'X-Auth-Token': "96c17a74492b43168650e47f142d2a9b"}
+headers = {'X-Auth-Token': ""}
 url = "http://api.football-data.org/v4/matches"
 
 # Function to fetch scores (similar to your previous project)
@@ -64,4 +64,5 @@ def load_scores_page():
     return render_template('scores.html', scores=live_scores)
 
 if __name__ == '__main__':
+
     app.run(debug=True)
