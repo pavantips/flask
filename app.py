@@ -1,9 +1,26 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 import requests
 
+# Create Flask app FIRST
 app = Flask(__name__)
 
-# Step 2: Replace with your actual API key
+# THEN configure database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///football_app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Define your model
+class FavoriteTeam(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    team_name = db.Column(db.String(100), nullable=False)
+    user_name = db.Column(db.String(50), nullable=False)
+
+# Create tables
+with app.app_context():
+    db.create_all()
+
+# Your existing API configuration
 api_key = 'YOUR_API_KEY'
 headers = {'X-Auth-Token': ""}
 url = "http://api.football-data.org/v4/matches"
